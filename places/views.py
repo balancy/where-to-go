@@ -4,7 +4,7 @@ from .models import GeoJson, PlaceImage
 
 
 def show_index(request):
-    context = {
+    data = {
         "type": "FeatureCollection",
         "features": [
             {
@@ -16,7 +16,7 @@ def show_index(request):
                 "properties": {
                     "title": "«Легенды Москвы",
                     "placeId": "moscow_legends",
-                    "detailsUrl": "{% static 'places/moscow_legends.json' %}"
+                    "detailsUrl": "/static/places/moscow_legends.json"
                 }
             },
             {
@@ -28,10 +28,10 @@ def show_index(request):
                 "properties": {
                     "title": "Крыши24.рф",
                     "placeId": "roofs24",
-                    "detailsUrl": "{% static 'places/roofs24.json' %}"
+                    "detailsUrl": "/static/places/roofs24.json"
                 }
             }
         ]
     }
 
-    return render(request, "index.html", context=context)
+    return render(request, "index.html", context={"data": data})
