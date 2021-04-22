@@ -1,37 +1,29 @@
 from django.shortcuts import render
 
-from .models import GeoJson, PlaceImage
+from .models import GeoJson
+
+
+def serialize_geojson(geojson):
+    return {
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [geojson.longitude, geojson.latitude]
+        },
+        "properties": {
+            "title": geojson.title,
+            "placeId": geojson.placeId,
+            "detailsUrl": ""
+        }
+    }
 
 
 def show_index(request):
+    features = [serialize_geojson(geojson) for geojson in GeoJson.objects.all()]
+
     data = {
         "type": "FeatureCollection",
-        "features": [
-            {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [37.62, 55.793676]
-                },
-                "properties": {
-                    "title": "«Легенды Москвы",
-                    "placeId": "moscow_legends",
-                    "detailsUrl": "/static/places/moscow_legends.json"
-                }
-            },
-            {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [37.64, 55.753676]
-                },
-                "properties": {
-                    "title": "Крыши24.рф",
-                    "placeId": "roofs24",
-                    "detailsUrl": "/static/places/roofs24.json"
-                }
-            }
-        ]
+        "features": features,
     }
 
     return render(request, "index.html", context={"data": data})
