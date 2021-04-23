@@ -2,10 +2,12 @@ from django.contrib import admin
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 
+from adminsortable2.admin import SortableAdminMixin, SortableInlineAdminMixin
+
 from .models import GeoJson, PlaceImage
 
 
-class PlaceImageInline(admin.TabularInline):
+class PlaceImageInline(SortableInlineAdminMixin, admin.TabularInline):
     model = PlaceImage
     readonly_fields = ('image_tag',)
 
