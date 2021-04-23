@@ -2,6 +2,16 @@ from django.contrib import admin
 
 from .models import GeoJson, PlaceImage
 
-# Register your models here.
-admin.site.register(GeoJson)
+
+class PlaceImageInline(admin.TabularInline):
+    model = PlaceImage
+
+
+@admin.register(GeoJson)
+class GeoJsonAdmin(admin.ModelAdmin):
+    inlines = [
+        PlaceImageInline,
+    ]
+
+
 admin.site.register(PlaceImage)
