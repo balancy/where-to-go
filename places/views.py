@@ -14,7 +14,7 @@ def serialize_geojson(geojson):
         "properties": {
             "title": geojson.title,
             "placeId": geojson.placeId,
-            "detailsUrl": ""
+            "detailsUrl": f"places/{geojson.placeId}"
         }
     }
 
