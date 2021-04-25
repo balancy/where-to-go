@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 
-from adminsortable2.admin import SortableAdminMixin, SortableInlineAdminMixin
+from adminsortable2.admin import SortableInlineAdminMixin
 
 from .models import GeoJson, PlaceImage
 
@@ -13,9 +13,10 @@ class PlaceImageInline(SortableInlineAdminMixin, admin.TabularInline):
 
     def image_tag(self, instance):
         return format_html(
-            f'<img src="{mark_safe(instance.image.url)}" style="height: 200px;"/>'
+            f'<img src="{mark_safe(instance.image.url)}" '
+            f'style="height: 200px;"/>'
         ) or mark_safe(
-            "<span class='errors'>Can't find an image.</span>"
+           '<span class="errors">Can\'t find an image.</span>'
         )
 
 
