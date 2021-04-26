@@ -35,29 +35,24 @@ env\scripts\activate
 pip install -r requirements.txt
 ```
 
-## Launch
-
-1. Create your SQLite DB
-
-2. Make migrations
-```console
-python3 manage.py migrate
-```
-
-3. Run server
-```console
-python3 manage.py runserver
-```
-
-## Environmental variables
-
-Rename `.env.example` to `.env` and define your propre values for environmental variables:
+5. Rename `.env.example` to `.env` and define your propre values for environmental variables:
 
 - `DEBUG` — debug mode
 - `SECRET_KEY` — project secret key
 - `DATABASE_FILEPATH` — path to your SQLite DB
 - `ALLOWED_HOSTS` — see [Django documentation](https://docs.djangoproject.com/en/3.1/ref/settings/#allowed-hosts)
 
+## Launch
+
+1. Make migrations
+```console
+python3 manage.py migrate
+```
+
+2. Run server
+```console
+python3 manage.py runserver
+```
 
 ## Project goals
 
