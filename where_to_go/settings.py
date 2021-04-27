@@ -14,6 +14,7 @@ import dj_database_url
 from django.core.management.utils import get_random_secret_key
 import os
 from pathlib import Path
+import sys
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -99,7 +100,7 @@ if DEVELOPMENT_MODE is True:
             "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
         }
     }
-else:
+elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
     if os.getenv("DATABASE_URL", None) is None:
         raise Exception("DATABASE_URL environment variable not defined")
     DATABASES = {
