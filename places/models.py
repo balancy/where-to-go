@@ -3,7 +3,6 @@ from tinymce.models import HTMLField
 
 
 class GeoJson(models.Model):
-    placeId = models.CharField(max_length=100, default='')
     title = models.CharField(max_length=100)
     description_short = models.TextField(default='', blank=True)
     description_long = HTMLField()

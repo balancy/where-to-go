@@ -13,8 +13,7 @@ def serialize_geojson(geojson):
         },
         "properties": {
             "title": geojson.title,
-            "placeId": geojson.placeId,
-            "detailsUrl": f"places/{geojson.placeId}"
+            "detailsUrl": f"places/{geojson.id}"
         }
     }
 
@@ -31,7 +30,7 @@ def show_index(request):
 
 
 def show_place_detail(request, place_id):
-    place = get_object_or_404(GeoJson, placeId=place_id)
+    place = get_object_or_404(GeoJson, id=place_id)
 
     context = {
         "title": place.title,
