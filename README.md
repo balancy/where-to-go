@@ -39,7 +39,7 @@ pip install -r requirements.txt
 
 - `DEBUG` — debug mode
 - `SECRET_KEY` — project secret key
-- `DATABASE_FILEPATH` — path to your SQLite DB
+- `DATABASE_URL` — name of your DB
 - `ALLOWED_HOSTS` — see [Django documentation](https://docs.djangoproject.com/en/3.1/ref/settings/#allowed-hosts)
 
 ## Launch
