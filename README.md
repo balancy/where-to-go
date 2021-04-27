@@ -4,7 +4,7 @@ Web-app representing an interactive map with interesting points.
 
 ![Moscow roofs](https://i.ibb.co/kJ51dBB/roofs.png)
 
-Link to [site]()
+Link to [working site](https://where-to-go-vr4mz.ondigitalocean.app/)
 
 ## Install
 
@@ -41,6 +41,7 @@ pip install -r requirements.txt
 - `SECRET_KEY` — project secret key
 - `DATABASE_URL` — name of your DB
 - `ALLOWED_HOSTS` — see [Django documentation](https://docs.djangoproject.com/en/3.1/ref/settings/#allowed-hosts)
+- `DEVELOPMENT_MODE` - is development mode on?
 
 ## Launch
 
