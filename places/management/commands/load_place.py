@@ -1,4 +1,3 @@
-from django.core.files.base import File
 from django.core.management.base import BaseCommand
 import os
 
@@ -50,4 +49,6 @@ class Command(BaseCommand):
                 os.makedirs('media', exist_ok=True)
                 self.link_img_to_geojson(geo_json, img_url)
 
-        self.stdout.write(self.style.SUCCESS(f'Successfully added GeoJson {geo_json.title}'))
+        self.stdout.write(
+            self.style.SUCCESS(f'Successfully added GeoJson {geo_json.title}')
+        )
