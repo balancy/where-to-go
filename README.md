@@ -55,6 +55,13 @@ python3 manage.py migrate
 python3 manage.py runserver
 ```
 
+## Populate DB
+
+It's possible to populate DB by command:
+```console
+python manage.py load_place <path_to_your_json_file>
+```
+
 ## Project goals
 
 Code is written for study purpose - for Python web-development course on [Devman](https://dvmn.org).
