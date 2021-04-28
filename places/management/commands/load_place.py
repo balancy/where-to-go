@@ -46,7 +46,6 @@ class Command(BaseCommand):
 
         if imgs_urls := json['imgs']:
             for img_url in imgs_urls:
-                os.makedirs('media', exist_ok=True)
                 self.link_img_to_geojson(geo_json, img_url)
 
         self.stdout.write(
