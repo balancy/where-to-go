@@ -1,7 +1,6 @@
 from django.core.management.base import BaseCommand
-import os
 
-from places.models import GeoJson, PlaceImage
+from places.models import Place, PlaceImage
 
 import requests
 
@@ -34,7 +33,7 @@ class Command(BaseCommand):
 
         json = response.json()
 
-        geo_json = GeoJson(
+        place = Place(
             title=json['title'],
             description_short=json['description_short'],
             description_long=json['description_long'],
@@ -42,12 +41,12 @@ class Command(BaseCommand):
             latitude=json['coordinates']['lat'],
         )
 
-        geo_json.save()
+        place.save()
 
         if imgs_urls := json['imgs']:
             for img_url in imgs_urls:
-                self.link_img_to_geojson(geo_json, img_url)
+                self.link_img_to_geojson(place, img_url)
 
         self.stdout.write(
-            self.style.SUCCESS(f'Successfully added GeoJson {geo_json.title}')
+            self.style.SUCCESS(f'Successfully added GeoJson {place.title}')
         )

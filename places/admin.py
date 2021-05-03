@@ -4,7 +4,7 @@ from django.utils.safestring import mark_safe
 
 from adminsortable2.admin import SortableInlineAdminMixin
 
-from .models import GeoJson, PlaceImage
+from .models import Place, PlaceImage
 
 
 class PlaceImageInline(SortableInlineAdminMixin, admin.TabularInline):
@@ -20,8 +20,8 @@ class PlaceImageInline(SortableInlineAdminMixin, admin.TabularInline):
         )
 
 
-@admin.register(GeoJson)
-class GeoJsonAdmin(admin.ModelAdmin):
+@admin.register(Place)
+class PlaceAdmin(admin.ModelAdmin):
     inlines = [
         PlaceImageInline,
     ]

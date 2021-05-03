@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render
 from django.http import JsonResponse
 
-from .models import GeoJson
+from .models import Place
 
 
 def serialize_geojson(geojson):
@@ -19,7 +19,7 @@ def serialize_geojson(geojson):
 
 
 def show_index(request):
-    features = [serialize_geojson(geojson) for geojson in GeoJson.objects.all()]
+    features = [serialize_geojson(place) for place in Place.objects.all()]
 
     context = {
         "type": "FeatureCollection",
@@ -30,7 +30,7 @@ def show_index(request):
 
 
 def show_place_detail(request, place_id):
-    place = get_object_or_404(GeoJson, id=place_id)
+    place = get_object_or_404(Place, id=place_id)
 
     context = {
         "title": place.title,
