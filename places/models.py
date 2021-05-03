@@ -19,10 +19,10 @@ class PlaceImage(models.Model):
         Place,
         on_delete=models.CASCADE,
         related_name='images')
-    my_order = models.PositiveIntegerField(default=0, blank=False, null=False)
+    image_order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
     class Meta(object):
-        ordering = ['my_order']
+        ordering = ['image_order']
 
     def __str__(self):
         return f'{self.__class__.__name__}<{self.image}>'
