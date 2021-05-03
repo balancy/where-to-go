@@ -9,8 +9,6 @@ class GeoJson(models.Model):
     longitude = models.FloatField()
     latitude = models.FloatField()
 
-    my_order = models.PositiveIntegerField(default=0, blank=False, null=False)
-
 
 class PlaceImage(models.Model):
     image = models.FileField(upload_to='.', null=True)
