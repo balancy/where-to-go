@@ -12,7 +12,7 @@ class Command(BaseCommand):
         parser.add_argument('json_file_url', type=str)
 
     @staticmethod
-    def link_img_to_geojson(geo_json, img_url):
+    def link_img_to_place(geo_json, img_url):
         response_img = requests.get(img_url)
         response_img.raise_for_status()
 
@@ -21,7 +21,7 @@ class Command(BaseCommand):
             f.write(response_img.content)
 
         place_image = PlaceImage(
-            geojson=geo_json,
+            place=geo_json,
         )
         place_image.image.name = filename
         place_image.save()
@@ -45,7 +45,7 @@ class Command(BaseCommand):
 
         if imgs_urls := json['imgs']:
             for img_url in imgs_urls:
-                self.link_img_to_geojson(place, img_url)
+                self.link_img_to_place(place, img_url)
 
         self.stdout.write(
             self.style.SUCCESS(f'Successfully added GeoJson {place.title}')
