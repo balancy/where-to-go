@@ -4,7 +4,7 @@ from tinymce.models import HTMLField
 
 class GeoJson(models.Model):
     title = models.CharField(max_length=100)
-    description_short = models.TextField(default='', blank=True)
+    description_short = models.TextField(blank=True)
     description_long = HTMLField()
     longitude = models.FloatField()
     latitude = models.FloatField()
