@@ -14,7 +14,7 @@ class Place(models.Model):
 
 
 class PlaceImage(models.Model):
-    image = models.FileField(upload_to='.')
+    image = models.ImageField(upload_to='.')
     geojson = models.ForeignKey(
         Place,
         on_delete=models.CASCADE,
