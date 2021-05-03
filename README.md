@@ -4,7 +4,7 @@ Web-app representing an interactive map with interesting points.
 
 ![Moscow roofs](https://i.ibb.co/kJ51dBB/roofs.png)
 
-Link to [working site](https://where-to-go-vr4mz.ondigitalocean.app/)
+Link to [working site](https://balancy.pythonanywhere.com/)
 
 ## Install
 
