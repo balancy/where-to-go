@@ -10,12 +10,12 @@ class Place(models.Model):
     latitude = models.FloatField()
 
     def __str__(self):
-        return f'{self.__class__.__name__}<{self.title}>'
+        return self.title
 
 
 class PlaceImage(models.Model):
     image = models.ImageField(upload_to='.')
-    geojson = models.ForeignKey(
+    place = models.ForeignKey(
         Place,
         on_delete=models.CASCADE,
         related_name='images')
@@ -25,4 +25,4 @@ class PlaceImage(models.Model):
         ordering = ['image_order']
 
     def __str__(self):
-        return f'{self.__class__.__name__}<{self.image}>'
+        return f'{self.place.title}, фото {self.image.url}'
