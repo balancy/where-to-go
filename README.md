@@ -41,7 +41,6 @@ pip install -r requirements.txt
 - `SECRET_KEY` — project secret key
 - `DATABASE_URL` — name of your DB
 - `ALLOWED_HOSTS` — see [Django documentation](https://docs.djangoproject.com/en/3.1/ref/settings/#allowed-hosts)
-- `DEVELOPMENT_MODE` - is development mode on?
 
 ## Launch
 
