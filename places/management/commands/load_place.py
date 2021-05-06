@@ -36,19 +36,19 @@ class Command(BaseCommand):
         response = requests.get(link)
         response.raise_for_status()
 
-        json = response.json()
+        new_place = response.json()
 
         place, created = Place.objects.filter(
-            Q(title=json['title']),
+            Q(title=new_place['title']),
         ).get_or_create(
-            title=json['title'],
-            description_short=json['description_short'],
-            description_long=json['description_long'],
-            longitude=json['coordinates']['lng'],
-            latitude=json['coordinates']['lat'],
+            title=new_place['title'],
+            description_short=new_place['description_short'],
+            description_long=new_place['description_long'],
+            longitude=new_place['coordinates']['lng'],
+            latitude=new_place['coordinates']['lat'],
         )
 
-        if imgs_urls := json['imgs']:
+        if imgs_urls := new_place['imgs']:
             for img_url in imgs_urls:
                 self.download_img_and_link_to_place(place, img_url)
 
