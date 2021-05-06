@@ -1,4 +1,5 @@
 from django.core.management.base import BaseCommand
+from django.db.models import Q
 from os.path import split as os_split
 from urllib.parse import urlsplit
 
@@ -23,11 +24,12 @@ class Command(BaseCommand):
         with open(f'media/{filename}', 'wb') as f:
             f.write(response_img.content)
 
-        place_image = PlaceImage(
+        PlaceImage.objects.filter(
+            Q(place=place) & Q(image=filename)
+        ).get_or_create(
             place=place,
+            image=filename,
         )
-        place_image.image.name = filename
-        place_image.save()
 
     def handle(self, *args, **options):
         link = options['json_file_url']
@@ -36,15 +38,15 @@ class Command(BaseCommand):
 
         json = response.json()
 
-        place = Place(
+        place, created = Place.objects.filter(
+            Q(title=json['title']),
+        ).get_or_create(
             title=json['title'],
             description_short=json['description_short'],
             description_long=json['description_long'],
             longitude=json['coordinates']['lng'],
             latitude=json['coordinates']['lat'],
         )
-
-        place.save()
 
         if imgs_urls := json['imgs']:
             for img_url in imgs_urls:
