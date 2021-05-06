@@ -1,4 +1,6 @@
 from django.core.management.base import BaseCommand
+from os.path import split as os_split
+from urllib.parse import urlsplit
 
 from places.models import Place, PlaceImage
 
@@ -12,16 +14,17 @@ class Command(BaseCommand):
         parser.add_argument('json_file_url', type=str)
 
     @staticmethod
-    def link_img_to_place(geo_json, img_url):
+    def download_img_and_link_to_place(place, img_url):
         response_img = requests.get(img_url)
         response_img.raise_for_status()
 
-        filename = img_url.split('/')[-1]
+        img_url_path = urlsplit(img_url)[2]
+        filename = os_split(img_url_path)[1]
         with open(f'media/{filename}', 'wb') as f:
             f.write(response_img.content)
 
         place_image = PlaceImage(
-            place=geo_json,
+            place=place,
         )
         place_image.image.name = filename
         place_image.save()
@@ -45,7 +48,7 @@ class Command(BaseCommand):
 
         if imgs_urls := json['imgs']:
             for img_url in imgs_urls:
-                self.link_img_to_place(place, img_url)
+                self.download_img_and_link_to_place(place, img_url)
 
         self.stdout.write(
             self.style.SUCCESS(f'Successfully added GeoJson {place.title}')
