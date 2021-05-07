@@ -13,8 +13,8 @@ class PlaceImageInline(SortableInlineAdminMixin, admin.TabularInline):
 
     def image_tag(self, instance):
         return format_html(
-            f'<img src="{mark_safe(instance.image.url)}" '
-            f'style="height: 200px;"/>'
+            '<img src="{}" style="height: 200px;"/>',
+            mark_safe(instance.image.url),
         ) or mark_safe(
            '<span class="errors">Can\'t find an image.</span>'
         )
