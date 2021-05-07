@@ -1,32 +1,32 @@
-from django.shortcuts import get_object_or_404, render
 from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, render
 
 from .models import Place
 
 
-def serialize_geojson(geojson):
+def serialize_place(place):
     return {
         "type": "Feature",
         "geometry": {
             "type": "Point",
-            "coordinates": [geojson.longitude, geojson.latitude]
+            "coordinates": [place.longitude, place.latitude]
         },
         "properties": {
-            "title": geojson.title,
-            "detailsUrl": f"places/{geojson.id}"
+            "title": place.title,
+            "detailsUrl": place.id,
         }
     }
 
 
 def show_index(request):
-    features = [serialize_geojson(place) for place in Place.objects.all()]
+    features_geojson = [serialize_place(place) for place in Place.objects.all()]
 
-    context = {
+    places_geojson = {
         "type": "FeatureCollection",
-        "features": features,
+        "features": features_geojson,
     }
 
-    return render(request, "index.html", context={"places": context})
+    return render(request, "index.html", context={"places": places_geojson})
 
 
 def show_place_detail(request, place_id):
@@ -34,7 +34,7 @@ def show_place_detail(request, place_id):
 
     context = {
         "title": place.title,
-        "imgs": [elm.image.url for elm in place.images.all()],
+        "imgs": [place_image.image.url for place_image in place.images.all()],
         "description_short": place.description_short,
         "description_long": place.description_long,
         "coordinates": {
