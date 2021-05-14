@@ -1,5 +1,4 @@
 from django.core.management.base import BaseCommand
-from django.db.models import Q
 from os.path import split as os_split
 from urllib.parse import urlsplit
 
@@ -25,7 +24,8 @@ class Command(BaseCommand):
             f.write(response_img.content)
 
         PlaceImage.objects.filter(
-            Q(place=place) & Q(image=filename)
+            place=place,
+            image=filename,
         ).get_or_create(
             place=place,
             image=filename,
@@ -39,7 +39,7 @@ class Command(BaseCommand):
         new_place = response.json()
 
         place, created = Place.objects.filter(
-            Q(title=new_place['title']),
+            title=new_place['title'],
         ).get_or_create(
             title=new_place['title'],
             description_short=new_place['description_short'],
