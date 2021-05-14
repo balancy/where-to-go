@@ -1,5 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
+from django.urls import reverse
 
 from .models import Place
 
@@ -13,7 +14,8 @@ def serialize_place(place):
         },
         "properties": {
             "title": place.title,
-            "detailsUrl": place.id,
+            # "detailsUrl": place.id,
+            "detailsUrl": reverse('place_details', args=(place.id,)),
         }
     }
 
