@@ -42,10 +42,16 @@ class Command(BaseCommand):
             title=new_place['title'],
         ).get_or_create(
             title=new_place['title'],
-            description_short=new_place['description_short'],
-            description_long=new_place['description_long'],
-            longitude=new_place['coordinates']['lng'],
-            latitude=new_place['coordinates']['lat'],
+            defaults={
+                'description_short': new_place['description_short'],
+                'description_long': new_place['description_long'],
+                'longitude': new_place['coordinates']['lng'],
+                'latitude': new_place['coordinates']['lat'],
+            },
+            # description_short=new_place['description_short'],
+            # description_long=new_place['description_long'],
+            # longitude=new_place['coordinates']['lng'],
+            # latitude=new_place['coordinates']['lat'],
         )
 
         if imgs_urls := new_place['imgs']:
